@@ -9,8 +9,6 @@ const inter = Inter({
   className: "h-full",
 });
 
-// ReactGA.initialize("G-1GHZWJ1V1Q");
-
 export default function App({ Component, pageProps }) {
   return (
     <div className={inter.className}>

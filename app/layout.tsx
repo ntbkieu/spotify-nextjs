@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Figtree } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const font = Figtree({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Spotify",
-  description: "Listen to Spotify@",
+  description: "Listen to Spotify!",
 };
 
 export default function RootLayout({
@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={font.className}>{children}</body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
