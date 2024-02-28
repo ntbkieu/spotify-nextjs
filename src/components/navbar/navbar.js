@@ -8,7 +8,7 @@ export default function Navbar({ }) {
       className={classNames(
         "w-full flex flex-col items-center justify-center",
         "transition-width duration-300 ease-in-out",
-        "justify-between bg-[#fff]"
+        "justify-between bg-color-1"
       )}
     >
       <div className="w-full h-full flex justify-between items-center px-[20px] py-[10px]">
@@ -28,8 +28,8 @@ export default function Navbar({ }) {
               src="/images/avatar.jpg"
               width={45}
               height={45}
-              className=""
-              alt="Navv Studio"
+              className="object-cover rounded-full"
+              alt="Spotify"
             />
           </div>
         </div>

@@ -21,6 +21,11 @@ module.exports = {
         "palettes-4": "#FDEDE8",
         "palettes-5": "#E6FFFA",
         "palettes-6": "#ECF3FE",
+        "color-1": "#000000",
+        "color-2": "#121212",
+        "color-3": "#242424",
+        "btn-1": "#FFFFFF",
+        "text-1": "#FFFFFF",
       },
       screens: {
         mobile: "320px",
