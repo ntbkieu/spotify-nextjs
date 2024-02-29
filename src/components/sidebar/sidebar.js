@@ -15,8 +15,7 @@ export default function SideBar() {
     const router = useRouter();
 
     return (
-        // <div className=" hidden md:flex flex-col  min-h-screen min-w-[250px]  justify-start py-[25px] px-[20px] border-r-[1px] gap-[25px]">
-        <div className="bg-color-1 flex flex-col min-h-screen min-w-[350px] justify-start py-[25px] px-[20px] border-r-[1px] gap-[25px]">
+        <div className=" bg-color-1 hidden md:flex flex-col  min-h-screen min-w-[350px]  justify-start py-[25px] px-[20px] gap-[25px]">
             <div className="grid gap-2">
                 <div className="bg-color-2 rounded-md">
                     <ItemSideBar
@@ -40,8 +39,8 @@ export default function SideBar() {
                         navigate={"/search"}
                     />
                 </div>
-                <div className="bg-color-2 rounded-md  flex flex-col gap-2">
-                    <div className="flex flex-row justify-between pt-2">
+                <div className="bg-color-2 rounded-md flex flex-col gap-2">
+                    <div className="inline-flex items-center justify-between pt-2">
                         <ItemSideBar
                             Icon={LibraryIcon}
                             colorIcon={"#FFFFFF"}
@@ -49,6 +48,9 @@ export default function SideBar() {
                             active={false}
                             navigate={"/library"}
                         />
+                        <div className={`text-white w-[15px] mr-5`}>
+                            <AddIcon />
+                        </div>
                     </div>
                     <div className="grid grid-cols-1 gap-2 overflow-y-hidden">
                         <div className="flex flex-col gap-3 py-[18px] px-[18px] bg-color-3 rounded-md text-white">

@@ -13,7 +13,7 @@ const Layout = ({ children, title }) => {
           <SideBar />
           <div className="flex flex-col flex-grow">
             <Navbar />
-            <div>{children}</div>
+            <div className="px-5">{children}</div>
           </div>
         </div>
       </main>
