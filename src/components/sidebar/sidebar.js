@@ -12,10 +12,8 @@ import {
 } from "../../assets/icons/icons";
 
 export default function SideBar() {
-    const router = useRouter();
-
     return (
-        <div className=" bg-color-1 hidden md:flex flex-col  min-h-screen min-w-[350px]  justify-start py-[25px] px-[20px] gap-[25px]">
+        <div className=" bg-color-1 hidden md:flex flex-col  min-h-screen min-w-[350px] justify-start py-[25px] px-[20px] gap-[25px]">
             <div className="grid gap-2">
                 <div className="bg-color-2 rounded-md">
                     <ItemSideBar

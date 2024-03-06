@@ -6,14 +6,31 @@ import { useRouter } from "next/router";
 import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 import { HiHome } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
+import { FaUserAlt } from "react-icons/fa";
+import useAuthModal from "@/hooks/useAuthModal";
+import { useUser } from "@/hooks/useUser";
 import ButtonAuth from "@/components/button/button-auth";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 
 
 export default function Navbar() {
   const router = useRouter();
-  const handleLogout = () => {
+  const authModal = useAuthModal();
+
+  const supabaseClient = useSupabaseClient();
+  const { user } = useUser();
+
+  const handleLogout = async () => {
+    const { error } = await supabaseClient.auth.signOut();
+
+    // router.refresh();
+
+    if (error) {
+      console.log(error);
+    }
   }
+
   return (
     <div
       className={classNames(
@@ -41,22 +58,39 @@ export default function Navbar() {
         </div>
 
         <div className="flex flex-row gap-x-4 justify-start items-center">
-          <>
-            <div>
+          {user ? (
+            <div className="flex gap-x-4 items-center">
               <ButtonAuth
-                onClick={() => { }}
-                title={'Sign up'}
-                classExtra="cursor-pointer bg-transparent text-neutral-300 font-medium"
+                onClick={handleLogout}
+                title={'Logout'}
+                classExtra="bg-white px-6 py-2"
+              />
+              <Image
+                src="/images/avatar.jpg"
+                width={45}
+                height={45}
+                className="object-cover rounded-full"
+                alt="Spotify"
               />
             </div>
-            <div>
-              <ButtonAuth
-                onClick={() => { }}
-                title={'Log in'}
-                classExtra="cursor-pointer"
-              />
-            </div>
-          </>
+          ) : (
+            <>
+              <div>
+                <ButtonAuth
+                  onClick={authModal.onOpen}
+                  title={'Sign up'}
+                  classExtra="cursor-pointer bg-transparent text-neutral-300 font-medium"
+                />
+              </div>
+              <div>
+                <ButtonAuth
+                  onClick={authModal.onOpen}
+                  title={'Log in'}
+                  classExtra="cursor-pointer"
+                />
+              </div>
+            </>
+          )}
           {/* <div className="w-[45px] h-[45px] flex justify-center items-center rounded-full border-[2px]">
             <Image
               src="/images/avatar.jpg"
