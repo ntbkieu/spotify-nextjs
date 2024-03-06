@@ -1,7 +1,7 @@
 import uniqid from "uniqid";
 import React, { useState } from 'react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
@@ -43,7 +43,7 @@ const UploadModal = () => {
   const onSubmit = async (values) => {
     try {
       setIsLoading(true);
-      
+
       const imageFile = values.image?.[0];
       const songFile = values.song?.[0];
 
@@ -55,9 +55,9 @@ const UploadModal = () => {
       const uniqueID = uniqid();
 
       // Upload song
-      const { 
-        data: songData, 
-        error: songError 
+      const {
+        data: songData,
+        error: songError
       } = await supabaseClient
         .storage
         .from('songs')
@@ -72,8 +72,8 @@ const UploadModal = () => {
       }
 
       // Upload image
-      const { 
-        data: imageData, 
+      const {
+        data: imageData,
         error: imageError
       } = await supabaseClient
         .storage
@@ -102,7 +102,7 @@ const UploadModal = () => {
       if (supabaseError) {
         return toast.error(supabaseError.message);
       }
-      
+
       router.refresh();
       setIsLoading(false);
       toast.success('Song created!');
@@ -122,8 +122,8 @@ const UploadModal = () => {
       isOpen={uploadModal.isOpen}
       onChange={onChange}
     >
-      <form 
-        onSubmit={handleSubmit(onSubmit)} 
+      <form
+        onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-y-4"
       >
         <Input
@@ -139,11 +139,11 @@ const UploadModal = () => {
           placeholder="Song author"
         />
         <div>
-          <div className="pb-1">
+          <div className="pb-1 text-white">
             Select a song file
           </div>
           <Input
-            placeholder="test" 
+            placeholder="test"
             disabled={isLoading}
             type="file"
             accept=".mp3"
@@ -152,11 +152,11 @@ const UploadModal = () => {
           />
         </div>
         <div>
-          <div className="pb-1">
+          <div className="pb-1 text-white">
             Select an image
           </div>
           <Input
-            placeholder="test" 
+            placeholder="test"
             disabled={isLoading}
             type="file"
             accept="image/*"

@@ -34,12 +34,14 @@ const Modal = ({ isOpen, onChange, title, description, children }) => {
             bg-neutral-800 
             p-[25px] 
             focus:outline-none
+            text-white
           ">
           <Dialog.Title 
             className="
               text-xl 
               text-center 
               font-bold 
+              text-white
               mb-4
             "
           >
@@ -51,11 +53,12 @@ const Modal = ({ isOpen, onChange, title, description, children }) => {
               text-sm 
               leading-normal 
               text-center
+              text-white
             "
           >
             {description}
           </Dialog.Description>
-          <div>
+          <div className=''>
             {children}
           </div>
           <Dialog.Close asChild>

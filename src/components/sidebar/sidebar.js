@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import ItemSideBar from "@/components/sidebar/item-sidebar";
 import ButtonPrimary from "@/components/button/button-primary";
 import ButtonIcon from "@/components/button/button-icon";
@@ -10,8 +9,11 @@ import {
     AddIcon,
     GlobalIcon
 } from "../../assets/icons/icons";
+import useUploadModal from "@/hooks/useUploadModal";
 
 export default function SideBar() {
+    const useUpload = useUploadModal();
+
     return (
         <div className=" bg-color-1 hidden md:flex flex-col  min-h-screen min-w-[350px] justify-start py-[25px] px-[20px] gap-[25px]">
             <div className="grid gap-2">
@@ -47,7 +49,9 @@ export default function SideBar() {
                             navigate={"/library"}
                         />
                         <div className={`text-white w-[15px] mr-5`}>
-                            <AddIcon />
+                            <div onClick={() => { useUpload.onOpen(); console.log("Hello"); }} >
+                            <AddIcon/>
+                            </div>
                         </div>
                     </div>
                     <div className="grid grid-cols-1 gap-2 overflow-y-hidden">
