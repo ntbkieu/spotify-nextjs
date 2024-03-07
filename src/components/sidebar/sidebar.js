@@ -10,9 +10,11 @@ import {
     GlobalIcon
 } from "../../assets/icons/icons";
 import useUploadModal from "@/hooks/useUploadModal";
+import useCreatePlaylist from "@/hooks/useCreatePlaylist";
 
 export default function SideBar() {
     const useUpload = useUploadModal();
+    const usePlaylist = useCreatePlaylist();
 
     return (
         <div className=" bg-color-1 hidden md:flex flex-col  min-h-screen min-w-[350px] justify-start py-[25px] px-[20px] gap-[25px]">
@@ -50,7 +52,7 @@ export default function SideBar() {
                         />
                         <div className={`text-white w-[15px] mr-5`}>
                             <div onClick={() => { useUpload.onOpen(); console.log("Hello"); }} >
-                            <AddIcon/>
+                                <AddIcon />
                             </div>
                         </div>
                     </div>
@@ -61,6 +63,7 @@ export default function SideBar() {
                             <ButtonPrimary
                                 title={"Create Playlist"}
                                 classExtra="cursor-pointer"
+                                onClick={() => { usePlaylist.onOpen() }}
                             />
                         </div>
                         <div className="flex flex-col gap-3 py-[18px] px-[18px] bg-color-3 rounded-md text-white">

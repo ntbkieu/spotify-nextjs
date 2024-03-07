@@ -12,6 +12,7 @@ export default function Home() {
 
   const [songs, setSongs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,7 +20,7 @@ export default function Home() {
         const songsData = await getSongs();
         setSongs(songsData);
       } catch (error) {
-        console.error(error.message);
+        setError(error.message);
       } finally {
         setLoading(false);
       }
