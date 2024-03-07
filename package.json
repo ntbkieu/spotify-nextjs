@@ -17,6 +17,8 @@
     "@supabase/auth-ui-shared": "^0.1.8",
     "@supabase/ssr": "^0.1.0",
     "@supabase/supabase-js": "^2.39.7",
+    "next-cookies": "^2.0.3",
+    "nookies": "^2.5.2",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.50.1",

@@ -5,6 +5,11 @@ const nextConfig = {
     experimental: {
         proxyTimeout: 1000000,
     },
+    images: {
+        domains: [
+            "ejfeuqhyfuavegichduy.supabase.co"
+        ]
+    },
     async rewrites() {
         return [
             {

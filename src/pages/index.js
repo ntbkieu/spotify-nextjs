@@ -1,20 +1,35 @@
 import Layout from "@/components/layout";
 import ListItem from "@/components/list-item";
+import PageContent from "@/components/page-content";
+import getSongs from "@/actions/getSongs";
+import { useState, useEffect } from "react";
+
+
+
+export const revalidate = 0;
 
 export default function Home() {
+
+  const [songs, setSongs] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const songsData = await getSongs();
+        setSongs(songsData);
+      } catch (error) {
+        console.error(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <Layout>
-      {/* <div className="w-full h-full flex flex-row bg-color-1">
-        <div className="px-[50px] py-[40px] gap-[20px] flex flex-col w-full">
-          <div className="flex flex-row justify-between items-center w-full relative overflow-hidden bg-color-2 py-[30px] rounded-[8px] shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]">
-            <div className="flex flex-col px-[20px]">
-              <span className="text-[21px] font-bold text-text-1 font-Jakarta">
-                Spotify Playlists
-              </span>
-            </div>
-          </div>
-        </div>
-      </div> */}
       <div className="rounded-lg h-full w-full overflow-hidden overflow-y-auto">
         <div className="mb-2">
           <h1 className="text-white text-3xl font-semibold">
@@ -25,15 +40,12 @@ export default function Home() {
               image="/images/favlist.png"
               name="Liked Songs" />
           </div>
-        </div>
-      </div>
-
-      <div className="mt-2 mb-7 px-6">
-        <div className="flex justify-between items-center">
-          <h1 className="text-white text-2xl font-semibold">Newest songs</h1>
-        </div>
-        <div className="text-white">
-          List of songs!
+          <div className="mt-4">
+            <div className="flex justify-between items-center">
+              <h1 className="text-white text-lg font-semibold">Newest songs</h1>
+            </div>
+            <PageContent songs={songs} />
+          </div>
         </div>
       </div>
     </Layout>

@@ -58,7 +58,7 @@ const Modal = ({ isOpen, onChange, title, description, children }) => {
           >
             {description}
           </Dialog.Description>
-          <div className=''>
+          <div className='text-white'>
             {children}
           </div>
           <Dialog.Close asChild>
