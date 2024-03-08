@@ -15,16 +15,16 @@ const Button = forwardRef(({
         `
         w-full 
         rounded-full 
-        bg-green-500
+        bg-white
         border
         border-transparent
-        px-3 
-        py-3 
+        px-2
+        py-2 
         disabled:cursor-not-allowed 
         disabled:opacity-50
-        text-black
+        text-[#080704]
         font-bold
-        hover:opacity-75
+        hover:scale-105
         transition
       `,
         disabled && 'opacity-75 cursor-not-allowed',

@@ -27,11 +27,11 @@ const Modal = ({ isOpen, onChange, title, description, children }) => {
             md:max-h-[85vh] 
             w-full 
             md:w-[90vw] 
-            md:max-w-[450px] 
+            md:max-w-[500px] 
             translate-x-[-50%] 
             translate-y-[-50%] 
             rounded-md 
-            bg-neutral-800 
+            bg-[#282828] 
             p-[25px] 
             focus:outline-none
             text-white

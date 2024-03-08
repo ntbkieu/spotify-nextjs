@@ -12,6 +12,7 @@ import Modal from '@/components/modal/custom-modal';
 import Input from '@/components/input/input';
 import Button from '@/components/button/button';
 import { NoSongIcon } from "../../assets/icons/icons";
+import Image from "next/image";
 
 const CreatePlaylistModal = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -55,31 +56,14 @@ const CreatePlaylistModal = () => {
 
             const uniqueID = uniqid();
 
-            // Create playlists
-            const {
-                data: playlistData,
-                error: playlistError
-            } = await supabaseClient
-                .storage
-                .from('playlists')
-                .upload(`playlist-${values.title}-${uniqueID}`, imagePlaylist, {
-                    cacheControl: '3600',
-                    upsert: false
-                });
-
-            if (playlistError) {
-                setIsLoading(false);
-                return toast.error('Failed playlist create');
-            }
-
             // Upload image
             const {
                 data: imageData,
                 error: imageError
             } = await supabaseClient
                 .storage
-                .from('images')
-                .upload(`image-${values.title}-${uniqueID}`, imageFile, {
+                .from('playlists')
+                .upload(`playlist-${values.title}-${uniqueID}`, imagePlaylist, {
                     cacheControl: '3600',
                     upsert: false
                 });
@@ -94,16 +78,16 @@ const CreatePlaylistModal = () => {
                 .from('playlists')
                 .insert({
                     user_id: user.id,
-                    title: values.description,
+                    title: values.title,
+                    description: values.description,
                     image_path: imageData.path,
-                    playlist_path: playlistData.path
                 });
 
             if (supabaseError) {
                 return toast.error(supabaseError.message);
             }
 
-            router.refresh();
+            router.push('/playlist');
             setIsLoading(false);
             toast.success('Playlist created!');
             reset();
@@ -135,16 +119,21 @@ const CreatePlaylistModal = () => {
     return (
         <Modal
             title="Add new playlist"
-            description=""
             isOpen={createPlaylist.isOpen}
             onChange={onChange}
         >
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2">
                 {/* Image Preview */}
-                <div className="col-span-1 mr-4 relative">
-                    <label htmlFor="imageInput" className="cursor-pointer">
+                <div className="col-span-1 mr-4 relative w-[200px] h-[200px]">
+                    <label htmlFor="imageInput" className="cursor-pointer w-[200px] h-[200px]">
                         {imagePreview ? (
-                            <img src={imagePreview} alt="Image Preview" className="max-w-full h-auto w-full aspect-w-1 aspect-h-1 object-cover" />
+                            <Image
+                                src={imagePreview}
+                                alt="Image Preview"
+                                layout="fill"
+                                objectFit="cover"
+                                className="shadow-lg"
+                            />
                         ) : (
                             <div className="bg-black h-full w-full flex items-center justify-center">
                                 <div className="h-10 w-10">
@@ -153,14 +142,6 @@ const CreatePlaylistModal = () => {
                             </div>
                         )}
                     </label>
-                    <input
-                        id="imageInput"
-                        type="file"
-                        accept="image/*"
-                        className="hidden"
-                        {...register('image', { required: true })}
-                        onChange={handleImageChange}
-                    />
                 </div>
 
 
@@ -178,10 +159,11 @@ const CreatePlaylistModal = () => {
                     <Input
                         id="description"
                         disabled={isLoading}
+                        {...register('description')}
                         placeholder="Description"
                     />
 
-                    {/* <div>
+                    <div>
                         <div className="pb-1 text-white">
                             Select an image
                         </div>
@@ -194,12 +176,13 @@ const CreatePlaylistModal = () => {
                             {...register('image', { required: true })}
                             onChange={handleImageChange}
                         />
-                    </div> */}
+                    </div>
                     <Button disabled={isLoading} type="submit">
                         Create
                     </Button>
                 </form>
             </div>
+            <div className="text-[11px] font-medium text-white mt-2">By proceeding, you agree to give Spotify access to the image you choose to upload. Please make sure you have the right to upload the image.</div>
         </Modal>
     );
 }
