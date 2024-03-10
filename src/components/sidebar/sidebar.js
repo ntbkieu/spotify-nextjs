@@ -11,6 +11,7 @@ import {
 } from "../../assets/icons/icons";
 import useUploadModal from "@/hooks/useUploadModal";
 import useCreatePlaylist from "@/hooks/useCreatePlaylist";
+import Section from "@/components/section/section";
 
 export default function SideBar() {
     const useUpload = useUploadModal();
@@ -76,7 +77,7 @@ export default function SideBar() {
                         </div>
                     </div>
                     <div className="flex flex-col gap-3 py-[18px] px-[18px] rounded-md text-white">
-                        <p className="font-thin text-[10px]">Legal</p>
+                        <Section title="" links={['Legal', 'Privacy Policy']} direction="horizontal" />
                         <ButtonIcon
                             Icon={GlobalIcon}
                             title={"English"}

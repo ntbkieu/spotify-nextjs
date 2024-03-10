@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Navbar from "@/components/navbar/navbar";
 import SideBar from "./sidebar/sidebar";
 import Head from "next/head";
-import SupabaseProvider from "../providers/SupabaseProvider";
+import SupabaseProvider from "@/providers/SupabaseProvider";
 import UserProvider from "@/providers/UserProvider";
 import ModalProvider from "@/providers/ModalProvider";
 import ToasterProvider from "@/providers/ToasterProvider";
@@ -46,7 +46,7 @@ const Layout = ({ children, title }) => {
               <SideBar />
               <div className="flex flex-col flex-grow">
                 <Navbar />
-                <div className="px-5">{children}</div>
+                <div className="">{children}</div>
               </div>
             </div>
           </UserProvider>
